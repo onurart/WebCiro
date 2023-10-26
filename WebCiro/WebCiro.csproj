@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Content Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Content Include="Areas\Admin\Models\RoleCreateViewModel.cs" />
+    <Content Include="Properties\launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SqlTableDependency" Version="8.5.8" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\WebLogin\" />
+    <None Include="wwwroot\data\realTimeData.js" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="23.1.3" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.2" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,84 @@
+﻿/*.dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll.dx-state-invisible .dx-scrollable-scroll-content {
+    background-color: white;
+    border-radius: 20%;
+}
+
+.dx-scrollbar-horizontal.dx-scrollbar-hoverable {
+    background-color: #1c3faa;
+    border-radius: 20%;
+}
+    .dx-scrollbar-horizontal.dx-scrollbar-hoverable .dx-scrollable-scroll .dx-scrollable-scroll-content
+    {
+        background-color:white;
+        border-radius:20%;
+    }*/
+
+#devextreme7 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme7:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme1 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme1:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme13 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme13:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme19 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme19:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme32 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme32:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme39 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme39:hover {
+        background-color: #1c3faa;
+    }
+
+#devextreme26 {
+    color: white;
+    background-color: darkblue;
+    border-radius: 5px;
+}
+
+    #devextreme26:hover {
+        background-color: #1c3faa;
+    }

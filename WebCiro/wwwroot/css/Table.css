@@ -1,0 +1,70 @@
+﻿table {
+    width: 90%;
+    margin: 0 5%;
+    text-align: left;
+}
+
+th, td {
+    padding: 0.5em;
+}
+body {
+    background: #f3f4f6;
+}
+
+
+
+table {
+    width: 800px;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(255, 255, 255);
+}
+
+th {
+    text-align: left;
+}
+
+thead th {
+    background-color: #55608f;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+tbody td {
+    position: relative;
+}
+
+    tbody td:hover:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9999px;
+        bottom: -9999px;
+        background-color: #6E7B88;
+        z-index: -1;
+    }
+#tblSale {
+    background: #555;
+}
+
+#tblSale thead {
+    background: #fdfdfd;
+}
+    #tblSale thead tr th {
+        color: #555;
+        font-weight: 800;
+    }
+
+    #tblSale tbody tr td {
+        font-weight: 900;
+    }
