@@ -1,6 +1,6 @@
 ﻿<style>
     .dx-datagrid-headers {
-        background-color: black !important;
+        background-color: #333 !important;
         color:white;       
     }
 
@@ -33,14 +33,14 @@
         .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
         .Columns(columns =>
         {
-            columns.AddFor(m => m.City).Caption("İL").CssClass("text-left");
+            columns.AddFor(m => m.City).Caption("İL").CssClass("margin-right");
             columns.AddFor(m => m.StockCategories).Caption("KATEGORİ").CssClass("text-left");
             columns.AddFor(m => m.AccountCode).Caption("MÜŞTERİ KODU").CssClass("text-left");
             columns.AddFor(m => m.Customer).Caption("MÜŞTERİ").CssClass("text-left");
-            columns.AddFor(m => m.AUXCODE2).Caption("AUXCODE2").CssClass("text-left");
-            columns.AddFor(m => m.StokName).Caption("STOCK ADI").CssClass("text-left");
-            columns.AddFor(m => m.SpeCode).Caption("ÖZEL KODU").CssClass("text-left");
-            columns.AddFor(m => m.Amount).Caption("FİYAT").CssClass("text-left");
+            columns.AddFor(m => m.AUXCODE2).Caption("ARAÇ MARKA").CssClass("text-left");
+            columns.AddFor(m => m.StokName).Caption("ÜRÜN ADI").CssClass("text-left");
+            columns.AddFor(m => m.SpeCode).Caption("TEDARİKÇİ").CssClass("text-left");
+            @* columns.AddFor(m => m.Amount).Caption("FİYAT").CssClass("text-left"); *@
             columns.AddFor(m => m.TlNet).Caption("TL FİYAT").CssClass("text-left");
         })
         .FilterRow(f => f.Visible(true))

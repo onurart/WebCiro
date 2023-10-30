@@ -13,21 +13,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{78E65DDD-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{6E03E111-B539-4E7F-AD1F-52B35EA029A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Application", "Services\src\Core\WebCiro.Application\WebCiro.Application.csproj", "{F6D1D1C0-9CA0-42EF-B3DD-416E150D8768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.Application", "Services\src\Core\WebCiro.Application\WebCiro.Application.csproj", "{F6D1D1C0-9CA0-42EF-B3DD-416E150D8768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Domain", "Services\src\Core\WebCiro.Domain\WebCiro.Domain.csproj", "{D1A0913D-4246-412D-9B32-4AC2147CB2EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.Domain", "Services\src\Core\WebCiro.Domain\WebCiro.Domain.csproj", "{D1A0913D-4246-412D-9B32-4AC2147CB2EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Infrasturcture", "Services\src\External\WebCiro.Infrasturcture\WebCiro.Infrasturcture.csproj", "{3E6BD04F-1BA2-42CF-BBC2-2FFEC74775EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.Infrasturcture", "Services\src\External\WebCiro.Infrasturcture\WebCiro.Infrasturcture.csproj", "{3E6BD04F-1BA2-42CF-BBC2-2FFEC74775EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Persistance", "Services\src\External\WebCiro.Persistance\WebCiro.Persistance.csproj", "{1CB53B23-115B-492F-B6BA-B2A14A8E3AF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.Persistance", "Services\src\External\WebCiro.Persistance\WebCiro.Persistance.csproj", "{1CB53B23-115B-492F-B6BA-B2A14A8E3AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Presentation", "Services\src\External\WebCiro.Presentation\WebCiro.Presentation.csproj", "{D73BAF98-11D3-4540-877D-ADAFFFB7ED38}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{62333C06-3F06-41D6-8550-ECB887D278C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.Presentation", "Services\src\External\WebCiro.Presentation\WebCiro.Presentation.csproj", "{D73BAF98-11D3-4540-877D-ADAFFFB7ED38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{2AA568F6-9080-4A9A-B0FD-494B295DE101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.WebApi", "Services\src\WebApi\WebCiro.WebApi\WebCiro.WebApi.csproj", "{C919A516-B4CB-45E8-AE42-B826E84F95CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro.WebApi", "Services\src\WebApi\WebCiro.WebApi\WebCiro.WebApi.csproj", "{C919A516-B4CB-45E8-AE42-B826E84F95CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Core", "WebCiro.Core\WebCiro.Core.csproj", "{F87F7E90-F4CA-4277-8246-5206582AF40B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Repository", "WebCiro.Repository\WebCiro.Repository.csproj", "{8216DC37-4AD6-4BDD-A35C-D93C3C7C4C9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Service", "WebCiro.Service\WebCiro.Service.csproj", "{DC460328-9705-4D8F-A873-B83C62DF0DC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Api", "WebCiro.Api\WebCiro.Api.csproj", "{DB45FD1F-BFD6-4F28-BFB8-55850A27AFAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +69,22 @@ Global
 		{C919A516-B4CB-45E8-AE42-B826E84F95CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C919A516-B4CB-45E8-AE42-B826E84F95CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C919A516-B4CB-45E8-AE42-B826E84F95CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F87F7E90-F4CA-4277-8246-5206582AF40B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87F7E90-F4CA-4277-8246-5206582AF40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87F7E90-F4CA-4277-8246-5206582AF40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87F7E90-F4CA-4277-8246-5206582AF40B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8216DC37-4AD6-4BDD-A35C-D93C3C7C4C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8216DC37-4AD6-4BDD-A35C-D93C3C7C4C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8216DC37-4AD6-4BDD-A35C-D93C3C7C4C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8216DC37-4AD6-4BDD-A35C-D93C3C7C4C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC460328-9705-4D8F-A873-B83C62DF0DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC460328-9705-4D8F-A873-B83C62DF0DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC460328-9705-4D8F-A873-B83C62DF0DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC460328-9705-4D8F-A873-B83C62DF0DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB45FD1F-BFD6-4F28-BFB8-55850A27AFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB45FD1F-BFD6-4F28-BFB8-55850A27AFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB45FD1F-BFD6-4F28-BFB8-55850A27AFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB45FD1F-BFD6-4F28-BFB8-55850A27AFAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

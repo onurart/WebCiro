@@ -31,7 +31,8 @@ body {
 
 .top-section {
     overflow-y: scroll;
-    height: 75%;
+    height: 82%;
+    margin-left:3%
 }
 
 .bottom-section {
@@ -564,3 +565,4 @@ h1 a {
     text-decoration: none;
     color: #fff;
 }
+
