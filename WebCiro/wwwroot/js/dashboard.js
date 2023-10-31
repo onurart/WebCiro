@@ -7,78 +7,14 @@ setInterval(function () {
 $(function () {
 	connection.start().then(function () {
 
-		InvokeAntep();
+
 		InvokeSales();
-		//InvokeCustomer();
-		InvokeSamsun();
+
 	}).catch(function (err) {
 		return console.error(err.toString());
 	});
 });
 
-
-// Product
-function InvokeProducts() {
-	connection.invoke("SendProducts").catch(function (err) {
-		return console.error(err.toString());
-	});
-}
-
-connection.on("ReceivedProducts", function (products) {
-	BindProductsToGrid(products);
-});
-
-function BindProductsToGrid(products) {
-	$('#tblProduct tbody').empty();
-
-	var tr;
-	$.each(products, function (index, product) {
-		tr = $('<tr/>');
-		tr.append(`<td>${(index + 1)}</td>`);
-		tr.append(`<td>${product.name}</td>`);
-		tr.append(`<td>${product.category}</td>`);
-		tr.append(`<td>${product.price}</td>`);
-		$('#tblProduct').append(tr);
-	});
-}
-
-connection.on("ReceivedProductsForGraph", function (productsForGraph) {
-	BindProductsToGraph(productsForGraph);
-});
-
-function BindProductsToGraph(productsForGraph) {
-	var labels = [];
-	var data = [];
-
-	$.each(productsForGraph, function (index, item) {
-		labels.push(item.category);
-		data.push(item.products);
-	});
-
-	DestroyCanvasIfExists('canvasProudcts');
-
-	const context = $('#canvasProudcts');
-	const myChart = new Chart(context, {
-		type: 'doughnut',
-		data: {
-			labels: labels,
-			datasets: [{
-				label: '# of Products',
-				data: data,
-				backgroundColor: backgroundColors,
-				borderColor: borderColors,
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	});
-}
 
 // Sale
 function InvokeSales() {
@@ -101,9 +37,11 @@ function BindSalesToGrid(sales) {
 				currency: 'TRY',
 				minimumFractionDigits: 0,
 			});
+
 			const counter = document.getElementById('countSale');
 
 			const animate = () => {
+				console.log(counter)
 				let num1 = Number(counter.innerText.replace(/[^\d.-]/g, ''))
 				let num2 = sale.amount;
 				let sum = num1 + num2;
@@ -122,7 +60,7 @@ function BindSalesToGrid(sales) {
 
 			}
 
-			
+
 
 
 			let invokeModal = $('#invokeModal');
@@ -180,52 +118,117 @@ function BindSalesToGrid(sales) {
 
 
 
-//function InvokeCustomer() {
-//	connection.invoke("MapCustomer").catch(function (err) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// Product
+//function InvokeProducts() {
+//	connection.invoke("SendProducts").catch(function (err) {
 //		return console.error(err.toString());
 //	});
 //}
 
-//connection.on("ReceivedMapCusmert", function (sales) {
-//	BindMapCusmertoGrid(sales);
+//connection.on("ReceivedProducts", function (products) {
+//	BindProductsToGrid(products);
 //});
 
-//function BindMapCusmertoGrid(sales) {
-//	function processSale(index) {
-//		if (index < sales.length) {
-//			var sale = sales[index];
-//			//$('#countSaleWrap').find("span").remove();
+//function BindProductsToGrid(products) {
+//	$('#tblProduct tbody').empty();
 
-//			const formatter = new Intl.NumberFormat('tr-TR', {
-//				style: 'currency',
-//				currency: 'TRY',
-//			});
-
-//			const counter = document.getElementById('countSale');
-//			const speed = 200;
-
-
-//			const animate = () => {
-//				const value = +sale.amount;
-//				const data = +counter.innerText;
-
-//				const time = value / speed;
-//				if (data < value) {
-//					counter.innerText = Math.ceil(data + time);
-//					setTimeout(animate, 1);
-//				} else {
-//					counter.innerText = formatter.format(value);
-//				}
-
-//			}
-
-//			animate();
-//		}
-//	}
-//	// Start processing the first sale
-//	processSale(0);
+//	var tr;
+//	$.each(products, function (index, product) {
+//		tr = $('<tr/>');
+//		tr.append(`<td>${(index + 1)}</td>`);
+//		tr.append(`<td>${product.name}</td>`);
+//		tr.append(`<td>${product.category}</td>`);
+//		tr.append(`<td>${product.price}</td>`);
+//		$('#tblProduct').append(tr);
+//	});
 //}
 
+//connection.on("ReceivedProductsForGraph", function (productsForGraph) {
+//	BindProductsToGraph(productsForGraph);
+//});
+
+
+
+
+////function InvokeCustomer() {
+////	connection.invoke("MapCustomer").catch(function (err) {
+////		return console.error(err.toString());
+////	});
+////}
+
+////connection.on("ReceivedMapCusmert", function (sales) {
+////	BindMapCusmertoGrid(sales);
+////});
+
+////function BindMapCusmertoGrid(sales) {
+////	function processSale(index) {
+////		if (index < sales.length) {
+////			var sale = sales[index];
+////			//$('#countSaleWrap').find("span").remove();
+
+////			const formatter = new Intl.NumberFormat('tr-TR', {
+////				style: 'currency',
+////				currency: 'TRY',
+////			});
+
+////			const counter = document.getElementById('countSale');
+////			const speed = 200;
+
+
+////			const animate = () => {
+////				const value = +sale.amount;
+////				const data = +counter.innerText;
+
+////				const time = value / speed;
+////				if (data < value) {
+////					counter.innerText = Math.ceil(data + time);
+////					setTimeout(animate, 1);
+////				} else {
+////					counter.innerText = formatter.format(value);
+////				}
+
+////			}
+
+////			animate();
+////		}
+////	}
+////	// Start processing the first sale
+////	processSale(0);
+////}
 
 
 
@@ -242,191 +245,198 @@ function BindSalesToGrid(sales) {
 
 
 
-function InvokeAntep() {
-	connection.invoke("MapAntep").catch(function (err) {
-		return console.error(err.toString());
-	});
-}
 
-connection.on("ReceivedMapAntep", function (sales) {
-	BindAntepGrid(sales);
-});
+////function InvokeAntep() {
+////	connection.invoke("MapAntep").catch(function (err) {
+////		return console.error(err.toString());
+////	});
+////}
 
-function BindAntepGrid(sales) {
-	function processSale(index) {
-		if (index < sales.length) {
-			var sale = sales[index];
-	
-			$('#countantep').find("span").remove();
+////connection.on("ReceivedMapAntep", function (sales) {
+////	BindAntepGrid(sales);
+////});
 
-			$('#countantep').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
-		}
-	}
+////function BindAntepGrid(sales) {
+////	function processSale(index) {
+////		if (index < sales.length) {
+////			var sale = sales[index];
 
-	// Start processing the first sale
-	processSale(0);
-}
+////			$('#countantep').find("span").remove();
 
+////			$('#countantep').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
+////		}
+////	}
 
-
+////	// Start processing the first sale
+////	processSale(0);
+////}
 
 
 
-function InvokeSamsun() {
-	connection.invoke("MapSamsun").catch(function (err) {
-		return console.error(err.toString());
-	});
-}
-
-connection.on("ReceivedMapSamsun", function (sales) {
-	BindSamsunGrid(sales);
-});
-
-function BindSamsunGrid(sales) {
-	function processSale(index) {
-		if (index < sales.length) {
-			var sale = sales[index];
-		
-			$('#countSamsun').find("span").remove();
-
-			$('#countSamsun').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
-		}
-	}
-
-	// Start processing the first sale
-	processSale(0);
-}
 
 
 
-connection.on("ReceivedSalesForGraph", function (salesForGraph) {
-	BindSalesToGraph(salesForGraph);
-});
+////function InvokeSamsun() {
+////	connection.invoke("MapSamsun").catch(function (err) {
+////		return console.error(err.toString());
+////	});
+////}
 
-function BindSalesToGraph(salesForGraph) {
-	var labels = [];
-	var data = [];
+////connection.on("ReceivedMapSamsun", function (sales) {
+////	BindSamsunGrid(sales);
+////});
 
-	$.each(salesForGraph, function (index, item) {
-		labels.push(item.purchasedOn);
-		data.push(item.amount);
-	});
+////function BindSamsunGrid(sales) {
+////	function processSale(index) {
+////		if (index < sales.length) {
+////			var sale = sales[index];
 
-	DestroyCanvasIfExists('canvasSales');
+////			$('#countSamsun').find("span").remove();
 
-	const context = $('#canvasSales');
-	const myChart = new Chart(context, {
-		type: 'line',
-		data: {
-			labels: labels,
-			datasets: [{
-				label: '# of Sales',
-				data: data,
-				backgroundColor: backgroundColors,
-				borderColor: borderColors,
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	});
-}
+////			$('#countSamsun').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
+////		}
+////	}
 
-// Customer
-function InvokeCustomers() {
-	connection.invoke("SendCustomers").catch(function (err) {
-		return console.error(err.toString());
-	});
-}
+////	// Start processing the first sale
+////	processSale(0);
+////}
 
-connection.on("ReceivedCustomers", function (customers) {
-	BindCustomersToGrid(customers);
-});
 
-function BindCustomersToGrid(customers) {
-	$('#tblCustomer tbody').empty();
 
-	var tr;
-	$.each(customers, function (index, customer) {
-		tr = $('<tr/>');
-		tr.append(`<td>${(index + 1)}</td>`);
-		tr.append(`<td>${customer.name}</td>`);
-		tr.append(`<td>${customer.gender}</td>`);
-		tr.append(`<td>${customer.mobile}</td>`);
-		$('#tblCustomer').append(tr);
-	});
-}
+//connection.on("ReceivedSalesForGraph", function (salesForGraph) {
+//	BindSalesToGraph(salesForGraph);
+//});
 
-connection.on("ReceivedCustomersForGraph", function (customersForGraph) {
-	BindCustomersToGraph(customersForGraph);
-});
+//function BindSalesToGraph(salesForGraph) {
+//	var labels = [];
+//	var data = [];
 
-function BindCustomersToGraph(customersForGraph) {
-	var datasets = [];
-	var labels = ['Customers']
-	var data = [];
-	$.each(customersForGraph, function (index, item) {
-		data = [];
-		data.push(item.customers);
-		var dataset = {
-			label: item.gender,
-			data: data,
-			backgroundColor: backgroundColors[index],
-			borderColor: borderColors[index],
-			borderWidth: 1
-		};
+//	$.each(salesForGraph, function (index, item) {
+//		labels.push(item.purchasedOn);
+//		data.push(item.amount);
+//	});
 
-		datasets.push(dataset);
-	});
+//	DestroyCanvasIfExists('canvasSales');
 
-	DestroyCanvasIfExists('canvasCustomers');
+//	const context = $('#canvasSales');
+//	const myChart = new Chart(context, {
+//		type: 'line',
+//		data: {
+//			labels: labels,
+//			datasets: [{
+//				label: '# of Sales',
+//				data: data,
+//				backgroundColor: backgroundColors,
+//				borderColor: borderColors,
+//				borderWidth: 1
+//			}]
+//		},
+//		options: {
+//			scales: {
+//				y: {
+//					beginAtZero: true
+//				}
+//			}
+//		}
+//	});
+//}
 
-	const context = $('#canvasCustomers');
-	const myChart = new Chart(context, {
-		type: 'bar',
-		data: {
-			labels: labels,
-			datasets: datasets,
-		},
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true
-				}
-			}
-		}
-	});
-}
+//// Customer
+//function InvokeCustomers() {
+//	connection.invoke("SendCustomers").catch(function (err) {
+//		return console.error(err.toString());
+//	});
+//}
 
-// supporting functions for Graphs
-function DestroyCanvasIfExists(canvasId) {
-	let chartStatus = Chart.getChart(canvasId);
-	if (chartStatus != undefined) {
-		chartStatus.destroy();
-	}
-}
+//connection.on("ReceivedCustomers", function (customers) {
+//	BindCustomersToGrid(customers);
+//});
 
-var backgroundColors = [
-	'rgba(255, 99, 132, 0.2)',
-	'rgba(54, 162, 235, 0.2)',
-	'rgba(255, 206, 86, 0.2)',
-	'rgba(75, 192, 192, 0.2)',
-	'rgba(153, 102, 255, 0.2)',
-	'rgba(255, 159, 64, 0.2)'
-];
-var borderColors = [
-	'rgba(255, 99, 132, 1)',
-	'rgba(54, 162, 235, 1)',
-	'rgba(255, 206, 86, 1)',
-	'rgba(75, 192, 192, 1)',
-	'rgba(153, 102, 255, 1)',
-	'rgba(255, 159, 64, 1)'
-];
+//function BindCustomersToGrid(customers) {
+//	$('#tblCustomer tbody').empty();
+
+//	var tr;
+//	$.each(customers, function (index, customer) {
+//		tr = $('<tr/>');
+//		tr.append(`<td>${(index + 1)}</td>`);
+//		tr.append(`<td>${customer.name}</td>`);
+//		tr.append(`<td>${customer.gender}</td>`);
+//		tr.append(`<td>${customer.mobile}</td>`);
+//		$('#tblCustomer').append(tr);
+//	});
+//}
+
+//connection.on("ReceivedCustomersForGraph", function (customersForGraph) {
+//	BindCustomersToGraph(customersForGraph);
+//});
+
+//function BindCustomersToGraph(customersForGraph) {
+//	var datasets = [];
+//	var labels = ['Customers']
+//	var data = [];
+//	$.each(customersForGraph, function (index, item) {
+//		data = [];
+//		data.push(item.customers);
+//		var dataset = {
+//			label: item.gender,
+//			data: data,
+//			backgroundColor: backgroundColors[index],
+//			borderColor: borderColors[index],
+//			borderWidth: 1
+//		};
+
+//		datasets.push(dataset);
+//	});
+
+//	DestroyCanvasIfExists('canvasCustomers');
+
+//	const context = $('#canvasCustomers');
+//	const myChart = new Chart(context, {
+//		type: 'bar',
+//		data: {
+//			labels: labels,
+//			datasets: datasets,
+//		},
+//		options: {
+//			scales: {
+//				y: {
+//					beginAtZero: true
+//				}
+//			}
+//		}
+//	});
+//}
+
+//// supporting functions for Graphs
+//function DestroyCanvasIfExists(canvasId) {
+//	let chartStatus = Chart.getChart(canvasId);
+//	if (chartStatus != undefined) {
+//		chartStatus.destroy();
+//	}
+//}
+
+//var backgroundColors = [
+//	'rgba(255, 99, 132, 0.2)',
+//	'rgba(54, 162, 235, 0.2)',
+//	'rgba(255, 206, 86, 0.2)',
+//	'rgba(75, 192, 192, 0.2)',
+//	'rgba(153, 102, 255, 0.2)',
+//	'rgba(255, 159, 64, 0.2)'
+//];
+//var borderColors = [
+//	'rgba(255, 99, 132, 1)',
+//	'rgba(54, 162, 235, 1)',
+//	'rgba(255, 206, 86, 1)',
+//	'rgba(75, 192, 192, 1)',
+//	'rgba(153, 102, 255, 1)',
+//	'rgba(255, 159, 64, 1)'
+//];
+
+
+
+
+
+/**********************************  Eski ********************************************** */
 
 //"use strict";
 

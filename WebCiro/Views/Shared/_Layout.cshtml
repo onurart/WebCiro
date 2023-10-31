@@ -40,7 +40,7 @@
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <div class="slider">
                     <a href="/Dashboard/Index">
-                    <p>Canlı Satiş</p>
+                        <p>Canlı Satiş</p>
                     </a>
                 </div>
             </li>
@@ -50,37 +50,37 @@
                 <div class="slider">
                     <a href="sdasdsa/asdsadsaaa">
 
-                    <p>Genel Rapor</p>
+                        <p>Genel Rapor</p>
                     </a>
                 </div>
             </li>
-     
-                <li class="instagram">
+
+            <li class="instagram">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <div class="slider">
+                <div class="slider">
                     <a href="/Member/Logout">
                         <p>Çıkıs Yap</p>
-                        </a>
-                    </div>
-                </li>
+                    </a>
+                </div>
+            </li>
 
             @*  <li class="google">
-                    <i class="fa fa-google" aria-hidden="true"></i>
-                    <div class="slider">
-                        <p>google</p>
-                    </div>
-                </li>
+            <i class="fa fa-google" aria-hidden="true"></i>
+            <div class="slider">
+            <p>google</p>
+            </div>
+            </li>
 
-                <li class="whatsapp">
-                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                    <div class="slider">
-                        <p>whatsapp</p>
-                    </div>
-                </li> *@
+            <li class="whatsapp">
+            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+            <div class="slider">
+            <p>whatsapp</p>
+            </div>
+            </li> *@
         </ul>
     </div>
     @RenderBody()
-       <script>
+    <script>
 
         var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
         var cityName = document.getElementById("city-name");
@@ -122,6 +122,7 @@
         const formatter = new Intl.NumberFormat('tr-TR', {
             style: 'currency',
             currency: 'TRY',
+            minimumFractionDigits: 0,
         });
 
         function addRandomNumberToRandomDiv() {
@@ -130,22 +131,19 @@
             let selectedDiv = divs[randomIndex];
 
             if (selectedDiv) {
-                let randomNumber = Math.floor(Math.random() * (5000 - 300 + 1)) + 300; // 300 ile 5000 arasında rastgele bir sayı al
+                let randomNumber = Math.floor(Math.random() * (50000 - 1000 + 1)) + 300; // 300 ile 5000 arasında rastgele bir sayı al
                 let num1 = selectedDiv.innerText.replace(/[^\d.-]/g, '');
 
-                console.log(num1)
+
 
                 let num1ToInt = parseInt(num1)
 
-                console.log(typeof (randomNumber))
-                console.log(num1ToInt, " ", randomNumber)
+
 
                 let result = num1ToInt + randomNumber;
 
-                console.log(result)
 
                 let formattedResult = formatter.format(result)
-                console.log(formattedResult)
 
 
 
