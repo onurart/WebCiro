@@ -1,9 +1,0 @@
-﻿//global using WebCiro.Core.Utilities.Abstract;
-//global using WebCiro.Core.Utilities.Concrete;
-//global using WebCiro.Repository.Constants;
-//global using WebCiro.Core.Repositories;
-//global using WebCiro.Core.UnitOfWorks;
-global using WebCiro.Core.Entities;
-global using Microsoft.EntityFrameworkCore;
-global using System.Linq.Expressions;
-global using AutoMapper;
