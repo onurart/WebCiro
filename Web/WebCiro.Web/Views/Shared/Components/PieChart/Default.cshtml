@@ -1,0 +1,64 @@
+﻿<style>
+    #pie {
+        height: 440px;
+    }
+
+        #pie * {
+            margin: 0 auto;
+        }
+</style>
+
+@(Html.DevExtreme().PieChart()
+    .ID("pie")
+    .Size(s => s.Width(1000))
+    .Palette(VizPalette.Material)
+        .PaletteExtensionMode(VizPaletteExtensionMode.Blend)
+    .Series(s => s
+        .Add()
+        .ArgumentField("StockCategories")
+        .ValueField("TotalAmount")
+        .Label(l => l
+            .Visible(true)
+            .Connector(c => c
+                .Visible(true)
+                .Width(1)
+            )
+        )
+    )
+    .Title("İle Göre Pasta Grafiği")
+    .Export(e => e.Enabled(true))
+    .OnPointClick(@<text>
+        function (e) {
+        var point = e.target;
+        toggleVisibility(point);
+        }
+    </text>)
+    .OnLegendClick(@<text>
+        function (e) {
+        var arg = e.target;
+        toggleVisibility(this.getAllSeries()[0].getPointsByArg(arg)[0]);
+        }
+    </text>)
+    .DataSource(new JS("chartData"))
+)
+
+<script>
+    // İlk başta dxPieChart bileşenini başlat
+    $(function () {
+        $("#pie").dxPieChart({
+        });
+        updatePieChart();
+    });
+
+    var chartData = [];
+
+    function updatePieChart() {
+        $.get('/Dashboard/GetByReportBranchPie', function (data) {
+            var pieChart = $("#pie").dxPieChart("instance");
+            console.log(data)
+           
+            pieChart.option("dataSource", data);
+        });
+    }
+</script>
+

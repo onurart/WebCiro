@@ -2,12 +2,12 @@
     ViewData["Title"] = "GetByReportBranch";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/css/style-2.css">
+@* <link rel="stylesheet" href="~/css/css/style-2.css">
 <link rel="stylesheet" href="~/css/skin_color-2.css">
 <link href="~/css/devextreme/dx.material.teal.light.compact.css" rel="stylesheet" />
 <link href="~/css/devextreme/dx.material.teal.light.css" rel="stylesheet" />
 <link href="~/css/devextreme/dx-diagram.min.css" rel="stylesheet" />
-<link href="~/css/devextreme/dx-diagram.css" rel="stylesheet" />
+<link href="~/css/devextreme/dx-diagram.css" rel="stylesheet" /> *@
 <style>
     td[role=columnheader] {
         text-align: center !important
@@ -41,6 +41,7 @@
         width: 175px;
         height: 44px;
         margin: auto;
+        margin-left: 23px;
     }
 
         select::-ms-expand {
@@ -77,6 +78,20 @@
         width: 500px;
         text-transform:capitalize;
     }
+
+    .btn-2 {
+        border: 2px solid #333;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-left:10px;
+    }
+
+        .btn-2:hover {
+            color: #fff;
+            background-color: #333;
+        }
 </style>
 <section class="content">
 
@@ -100,7 +115,22 @@
                         {
                             <option value="@branch">@(branch)</option>
                         }
-                    </select>
+                    </select><button class="btn-2" id="b2bButton">B2B Git</button>
+
+                    <script>
+                        // Add an event listener to the button
+                        document.getElementById('b2bButton').addEventListener('click', function () {
+                            // Redirect to the specified URL
+                            window.location.href = 'https://b4b.motorasin.com';
+                        });
+                    </script>
+
+
+
+
+
+
+
                     <div class="table-responsive">
 
                         @await Component.InvokeAsync("ReportBranchDataGrid")
@@ -136,5 +166,5 @@
         }
         if (e.rowType == "data")
             e.cellElement.css("text-align", "center");
-    },
+    }
 </script>

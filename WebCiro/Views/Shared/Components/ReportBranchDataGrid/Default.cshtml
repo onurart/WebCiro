@@ -1,61 +1,171 @@
 ﻿<style>
     .dx-datagrid-headers {
         background-color: #333 !important;
-        color:white;       
+        color: white;
     }
 
+    #redirectButton {
+        background-color: black;
+        color: white;
+        z-index: 5;
+        margin-top: 40px;
+    }
+
+    .demo-container {
+        display: flex;
+        justify-content: center;
+        height: 450px;
+    }
+
+    .buttons-demo {
+        width: 600px;
+        align-self: center;
+    }
+
+    .buttons-column > .column-header {
+        flex-grow: 0;
+        width: 150px;
+        height: 35px;
+        font-size: 130%;
+        opacity: 0.6;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+        .buttons > div {
+            width: 300px;
+            flex-wrap: nowrap;
+            display: flex;
+        }
+
+    .buttons-column > div {
+        width: 150px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .buttons-column {
+        width: 150px;
+        justify-content: center;
+    }
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
 </style>
 <div id="gridContainer">
-    @(Html.DevExtreme().DataGrid<NET_001_CIRO>()
-        .DataSource(d => d.Mvc()
-        .Controller("Dashboard")
-        .LoadAction("GetByReportBranchDataGrid")
-        .Key("Id"))
-        .ID("ReportBranch")
-        .ColumnMinWidth(100)
-        .ColumnAutoWidth(true)
-        .ShowColumnLines(false)
-        .ShowRowLines(true)
-        .RowAlternationEnabled(true)
-        .ShowBorders(false)
-        .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
-        .Paging(paging => paging.PageSize(30))
-        .Pager(pager =>
-        {
-            pager.Visible(true);
-            pager.DisplayMode(GridPagerDisplayMode.Full);
-            pager.ShowPageSizeSelector(true);
-            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 'all']"));
-            pager.ShowInfo(true);
-            pager.ShowNavigationButtons(true);
-        })
-        .SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true).Width(300))
-        .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
-        .Columns(columns =>
-        {
-            columns.AddFor(m => m.City).Caption("İL").CssClass("margin-right");
-            columns.AddFor(m => m.StockCategories).Caption("KATEGORİ").CssClass("text-left");
-            columns.AddFor(m => m.AccountCode).Caption("MÜŞTERİ KODU").CssClass("text-left");
-            columns.AddFor(m => m.Customer).Caption("MÜŞTERİ").CssClass("text-left");
-            columns.AddFor(m => m.AUXCODE2).Caption("ARAÇ MARKA").CssClass("text-left");
-            columns.AddFor(m => m.StokName).Caption("ÜRÜN ADI").CssClass("text-left");
-            columns.AddFor(m => m.SpeCode).Caption("TEDARİKÇİ").CssClass("text-left");
-            @* columns.AddFor(m => m.Amount).Caption("FİYAT").CssClass("text-left"); *@
-            columns.AddFor(m => m.TlNet).Caption("TL FİYAT").CssClass("text-left");
-        })
-        .FilterRow(f => f.Visible(true))
-        .HeaderFilter(f => f.Visible(true))
-        .Height(1000)
-        .FocusedRowEnabled(true)
-        .Grouping(g => g.AutoExpandAll(false))
-        .GroupPanel(p => p.Visible(true))
-        .Scrolling(s => s.Mode(GridScrollingMode.Virtual))
-        .Grouping(g => g.AutoExpandAll(false)))
+    <div>
+        @(Html.DevExtreme().DataGrid<NET_001_CIRO>()
+            .DataSource(d => d.Mvc()
+            .Controller("Dashboard")
+            .LoadAction("GetByReportBranchDataGrid")
+            .Key("Id"))
+            .ID("ReportBranch")
+            .ColumnMinWidth(100)
+            .ColumnAutoWidth(true)
+            .ShowColumnLines(false)
+            .ShowRowLines(true)
+            .RowAlternationEnabled(true)
+            .ShowBorders(false)
+            .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
+            .Export(e => e
+            .Enabled(true)
+            .AllowExportSelectedData(true)
+            .Formats(new[] { "pdf" }))
+            .OnExporting("exporting")
+            .Selection(s => s
+            .Mode(SelectionMode.Multiple)
+            .ShowCheckBoxesMode(GridSelectionShowCheckBoxesMode.Always))
+            .Paging(paging => paging.PageSize(30))
+            .Pager(pager =>
+            {
+                pager.Visible(true);
+                pager.DisplayMode(GridPagerDisplayMode.Full);
+                pager.ShowPageSizeSelector(true);
+                pager.AllowedPageSizes(new JS("[5, 10, 30, 70, 120, 180, 'all']"));
+                pager.ShowInfo(true);
+                pager.ShowNavigationButtons(true);
+            })
+            .SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true).Width(300))
+            .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+            .Columns(columns =>
+            {
+                columns.AddFor(m => m.City).Caption("İL").CssClass("margin-right");
+                columns.AddFor(m => m.StockCategories).Caption("KATEGORİ").CssClass("text-left");
+                columns.AddFor(m => m.AccountCode).Caption("MÜŞTERİ KODU").CssClass("text-left");
+                columns.AddFor(m => m.Customer).Caption("MÜŞTERİ").CssClass("text-left");
+                columns.AddFor(m => m.AUXCODE2).Caption("ARAÇ MARKA").CssClass("text-left");
+                columns.AddFor(m => m.StokName).Caption("ÜRÜN ADI").CssClass("text-left");
+                columns.AddFor(m => m.SpeCode).Caption("TEDARİKÇİ").CssClass("text-left");
+                // columns.AddFor(m => m.Amount).Caption("FİYAT").CssClass("text-left");
+                columns.AddFor(m => m.TlNet).Caption("TL FİYAT").CssClass("text-left");
+
+            })
+
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+            .Height(1000)
+            .FocusedRowEnabled(true)
+
+            .Grouping(g => g.AutoExpandAll(false))
+            .GroupPanel(p => p.Visible(true))
+            .Scrolling(s => s.Mode(GridScrollingMode.Virtual))
+            .Grouping(g => g.AutoExpandAll(false)))
+
+
+
+    </div>
 </div>
 
+<script src="~/js/filesaver.min.js"></script>
+
+<script>
+    // function printPage() {
+    //     var grid = $("#ReportBranch").dxDataGrid("instance");
+    //     var gridId = document.getElementById("gridId");
+    //     var gridContent = grid.element().clone();
+    //     // Your existing printPage logic here
+    // }
+
+ 
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('offer');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'offer.xlsx');
+            });
+        });
+    }
+
+    function redirectToUrl() {
+        window.location.href = 'https://b4b.motorasin.com/#!/login';
+    }
+</script>
 <script>
     var headerTemplate = function (header, info) {
         $('<div>').html(info.column.caption).appendTo(header);
         header.parent().css("backgroundColor", "skyblue")
     };
 </script>
+

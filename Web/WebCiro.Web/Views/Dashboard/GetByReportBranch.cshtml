@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "GetByReportBranch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* <link rel="stylesheet" href="~/css/css/style-2.css">
+<link rel="stylesheet" href="~/css/skin_color-2.css">
+<link href="~/css/devextreme/dx.material.teal.light.compact.css" rel="stylesheet" />
+<link href="~/css/devextreme/dx.material.teal.light.css" rel="stylesheet" />
+<link href="~/css/devextreme/dx-diagram.min.css" rel="stylesheet" />
+<link href="~/css/devextreme/dx-diagram.css" rel="stylesheet" /> *@
+<style>
+    td[role=columnheader] {
+        text-align: center !important
+    }
+
+    .dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row > td.dx-cell-modified:not(.dx-field-item-content):not(.dx-validation-pending), .dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row > td.dx-datagrid-invalid:not(.dx-field-item-content):not(.dx-validation-pending):not(.dx-datagrid-select-all), .dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row > td:not(.dx-validation-pending):not(.dx-datagrid-select-all) {
+        text-transform: capitalize !important;
+    }
+
+    .dx-datagrid-headers .dx-datagrid-table .dx-row > td .dx-sort, .dx-datagrid-headers .dx-datagrid-table .dx-row > td .dx-sort-indicator, .dx-datagrid-headers .dx-datagrid-table .dx-row > td:hover .dx-datagrid-text-content {
+        color: white !important;
+    }
+</style>
+<style>
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        outline: 0;
+        box-shadow: none;
+        border: 0 !important;
+        background: #333;
+        background-image: none;
+        flex: 1;
+        padding: 0 .5em;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1em;
+        font-family: 'Open Sans', sans-serif;
+        width: 175px;
+        height: 44px;
+        margin: auto;
+    }
+
+        select::-ms-expand {
+            display: none;
+        }
+
+    .select {
+        position: relative;
+        display: flex;
+        width: 20em;
+        height: 3em;
+        line-height: 3;
+        background: #5c6664;
+        overflow: hidden;
+        border-radius: .25em;
+    }
+
+        .select::after {
+            content: '\25BC';
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0 1em;
+            background: #2b2e2e;
+            cursor: pointer;
+            pointer-events: none;
+            transition: .25s all ease;
+        }
+
+        .select:hover::after {
+            color: #23b499;
+        }
+    option {
+        width: 500px;
+        text-transform:capitalize;
+    }
+</style>
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="box">
+                <div class="box-body">
+                    @await Component.InvokeAsync("PieChart")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-12">
+            <div class="box">
+                <div class="box-body">
+                    <select id="branchSelect">
+                        <option value="">İl Seç</option>
+                        @foreach (var branch in TempData["cities"] as List<string>)
+                        {
+                            <option value="@branch">@(branch)</option>
+                        }
+                    </select>
+                    <div class="table-responsive">
+
+                        @await Component.InvokeAsync("ReportBranchDataGrid")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('#branchSelect').on('change', function () {
+            var selectedBranch = $(this).val();
+
+            // Kontrol: Eğer değer seçildiyse
+            if (selectedBranch) {
+                var url = '/Dashboard/GetByReportBranch?branch=' + encodeURIComponent(selectedBranch);
+                window.location.href = url;
+            }
+        }
+        );
+    });
+
+</script>
+
+<script>
+
+    function onCellPrepared(e) {
+        if (e.rowType == "header") {
+            e.cellElement.css("text-align", "right");
+        }
+        if (e.rowType == "data")
+            e.cellElement.css("text-align", "center");
+    }
+</script>

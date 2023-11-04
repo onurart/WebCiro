@@ -54,9 +54,7 @@
 
     function updatePieChart() {
         $.get('/Dashboard/GetByReportBranchPie', function (data) {
-            var pieChart = $("#pie").dxPieChart("instance");
-            console.log(data)
-           
+            var pieChart = $("#pie").dxPieChart("instance");         
             pieChart.option("dataSource", data);
         });
     }

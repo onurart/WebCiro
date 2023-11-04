@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - WebCiro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/mycss/dx.material.custom-scheme.css" rel="stylesheet" />
+    <link href="~/css/devextreme/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+    <link href="~/css/mapcss/menu.css" rel="stylesheet" />
+    <link href="~/css/mapcss/table.css" rel="stylesheet" />
+    <link href="~/simple-line-icons.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/devextreme/cldr.js"></script>
+    <script src="~/js/devextreme/cldr/event.js"></script>
+    <script src="~/js/devextreme/cldr/supplemental.js"></script>
+    <script src="~/js/devextreme/cldr/unresolved.js"></script>
+    <script src="~/js/devextreme/globalize.js"></script>
+    <script src="~/js/devextreme/globalize/message.js"></script>
+    <script src="~/js/devextreme/globalize/number.js"></script>
+    <script src="~/js/devextreme/globalize/currency.js"></script>
+    <script src="~/js/devextreme/globalize/date.js"></script>
+    @* <script src="~/js/devextreme/cldr/Core.js"></script> *@
+    <script src="~/js/devextreme/jszip.js"></script>
+    <script src="~/js/devextreme/dx.all.js"></script>
+    <script src="~/js/devextreme/localization/dx.messages.tr.js"></script>
+    <script src="~/js/devextreme/globalize/tr.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
+    <script src="~/js/devextreme/exceljs.js"></script>
+
+</head>
+<body>
+
+    <div class="meuss">
+        <ul>
+            <li class="facebook">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <div class="slider">
+                    <a href="/Dashboard/Index">
+                        <p>Canlı Satiş</p>
+                    </a>
+                </div>
+            </li>
+
+            <li class="twitter">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                <div class="slider">
+                    <a href="sdasdsa/asdsadsaaa">
+
+                        <p>Genel Rapor</p>
+                    </a>
+                </div>
+            </li>
+
+            <li class="instagram">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                <div class="slider">
+                    <a href="/Member/Logout">
+                        <p>Çıkıs Yap</p>
+                    </a>
+                </div>
+            </li>
+
+            @*  <li class="google">
+            <i class="fa fa-google" aria-hidden="true"></i>
+            <div class="slider">
+            <p>google</p>
+            </div>
+            </li>
+
+            <li class="whatsapp">
+            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+            <div class="slider">
+            <p>whatsapp</p>
+            </div>
+            </li> *@
+        </ul>
+    </div>
+    @RenderBody()
+    <script>
+
+        var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
+        var cityName = document.getElementById("city-name");
+
+        for (i = 0; i < svgTurkeyMap.length; i++) {
+
+            svgTurkeyMap[i].addEventListener("mousemove", function () {
+                cityName.classList.add("show-city-name--active");
+                cityName.style.left = (event.clientX + 20 + "px");
+                cityName.style.top = (event.clientY + 20 + "px")
+                cityName.innerHTML = this.getAttribute("title");
+            });
+
+            svgTurkeyMap[i].addEventListener("mouseleave", function () {
+                cityName.classList.remove("show-city-name--active");
+            });
+
+            svgTurkeyMap[i].addEventListener("click", function () {
+                window.location.href = this.getAttribute("data-city-name");
+            });
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.city').on('click', function () {
+                var cityName = $(this).attr('title');
+                var url = '/Dashboard/GetByReportBranch?branch=' + encodeURIComponent(cityName);
+                window.location.href = url;
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+
+
+
+
+        const formatter = new Intl.NumberFormat('tr-TR', {
+            style: 'currency',
+            currency: 'TRY',
+            minimumFractionDigits: 0,
+        });
+
+        function addRandomNumberToRandomDiv() {
+            let divs = document.getElementsByClassName('h2');
+            let randomIndex = Math.floor(Math.random() * divs.length); // 0 ile div sayısı arasında rastgele bir indeks al
+            let selectedDiv = divs[randomIndex];
+
+            if (selectedDiv) {
+                let randomNumber = Math.floor(Math.random() * (50000 - 1000 + 1)) + 300; // 300 ile 5000 arasında rastgele bir sayı al
+                let num1 = selectedDiv.innerText.replace(/[^\d.-]/g, '');
+
+
+
+                let num1ToInt = parseInt(num1)
+
+
+
+                let result = num1ToInt + randomNumber;
+
+
+                let formattedResult = formatter.format(result)
+
+
+
+                let cntr = 0;
+                var interval = setInterval(function () {
+                    var randomNum = Math.floor(Math.random() * 100000);
+                    selectedDiv.innerHTML = randomNum;
+                    cntr++;
+                    if (cntr === 20) {
+                        clearInterval(interval);
+                        selectedDiv.innerHTML = " ";
+                        selectedDiv.innerHTML = formattedResult;
+                    }
+                }, 100);
+
+
+
+
+            }
+        }
+
+        // 1 saniyede bir fonksiyonu çağırarak rastgele div'e rastgele sayı ekle
+        setInterval(addRandomNumberToRandomDiv, 7500);
+    </script>
+    <script>
+        DevExpress.config({
+            forceIsoDateParsing: false,
+        });
+        DevExpress.localization.locale(navigator.language);
+    </script>
+</body>
+</html>

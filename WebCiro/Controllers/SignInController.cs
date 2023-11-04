@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebCiro.Extenisons;
 using WebCiro.Models.Authentication;
 using WebCiro.Models.ViewModels;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WebCiro.Controllers
 {
@@ -44,5 +42,14 @@ namespace WebCiro.Controllers
             ModelState.AddModelErrorList(new List<string>() { "Email veya şifre yanliş" });
             return View();
         }
+        private string GetUserIPAddress()
+        {
+            return HttpContext.Connection.RemoteIpAddress?.ToString();
+        }
+        private string GetUserMachineID()
+        {
+            return Environment.MachineName.GetHashCode().ToString();
+        }
+
     }
 }

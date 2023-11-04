@@ -5,6 +5,22 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCiro", "WebCiro\WebCiro.csproj", "{D4EFB5CC-816C-48A2-920E-661B90447121}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9032780A-2E29-4264-B86A-53597E19C5D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4356207F-5F7A-47C5-A40C-2ABB8F105BB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{3E02060B-8E8F-4A05-B3F9-A508D3626DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Core", "Core\WebCiro.Core\WebCiro.Core.csproj", "{A03FC914-C60F-4F62-B308-BC22FAE62799}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Service", "Services\WebCiro.Service\WebCiro.Service.csproj", "{19B44601-9072-4D9A-B6A3-F771D4F95DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Repository", "WebCiro.Repository\WebCiro.Repository.csproj", "{9E88E26D-D559-4439-918E-48137BF2FDA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{52D1DEBA-119C-4EB5-A37A-91623798F592}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCiro.Web", "Web\WebCiro.Web\WebCiro.Web.csproj", "{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +31,31 @@ Global
 		{D4EFB5CC-816C-48A2-920E-661B90447121}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4EFB5CC-816C-48A2-920E-661B90447121}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4EFB5CC-816C-48A2-920E-661B90447121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03FC914-C60F-4F62-B308-BC22FAE62799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03FC914-C60F-4F62-B308-BC22FAE62799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03FC914-C60F-4F62-B308-BC22FAE62799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03FC914-C60F-4F62-B308-BC22FAE62799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B44601-9072-4D9A-B6A3-F771D4F95DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B44601-9072-4D9A-B6A3-F771D4F95DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B44601-9072-4D9A-B6A3-F771D4F95DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B44601-9072-4D9A-B6A3-F771D4F95DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E88E26D-D559-4439-918E-48137BF2FDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E88E26D-D559-4439-918E-48137BF2FDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E88E26D-D559-4439-918E-48137BF2FDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E88E26D-D559-4439-918E-48137BF2FDA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A03FC914-C60F-4F62-B308-BC22FAE62799} = {9032780A-2E29-4264-B86A-53597E19C5D3}
+		{19B44601-9072-4D9A-B6A3-F771D4F95DA1} = {4356207F-5F7A-47C5-A40C-2ABB8F105BB5}
+		{9E88E26D-D559-4439-918E-48137BF2FDA1} = {3E02060B-8E8F-4A05-B3F9-A508D3626DA1}
+		{6AA0895C-9BD6-41D0-8AE8-6EFF32A86E0F} = {52D1DEBA-119C-4EB5-A37A-91623798F592}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50839BAC-5D3E-4DC4-8433-90F9FD355970}
