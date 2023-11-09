@@ -8,7 +8,7 @@
         public string ProductName { get; set; }
         public string ProdutGruop { get; set; }
         public decimal Amount { get; set; }
-        public string PurchasedOn { get; set; }
+        public string? PurchasedOn { get; set; }
         public bool IsActive { get; set; }
     }
 }

@@ -19,25 +19,25 @@ namespace WebCiro.Hubs
 
         }
         
-        public async Task MapCustomer()
-        {
-            var sales = saleRepository.MapCustomertDb();
-            await Clients.All.SendAsync("ReceivedMapCusmert", sales);
+        //public async Task MapCustomer()
+        //{
+        //    var sales = saleRepository.MapCustomertDb();
+        //    await Clients.All.SendAsync("ReceivedMapCusmert", sales);
 
-        }
+        //}
         
-        public async Task MapAntep()
-        {
-            var sales = saleRepository.MapGazianteptDb();
-            await Clients.All.SendAsync("ReceivedMapAntep", sales);
+        //public async Task MapAntep()
+        //{
+        //    var sales = saleRepository.MapGazianteptDb();
+        //    await Clients.All.SendAsync("ReceivedMapAntep", sales);
 
-        }
+        //}
         
-        public async Task MapSamsun()
-        {
-            var sales = saleRepository.MapSamsunDb();
-            await Clients.All.SendAsync("ReceivedMapSamsun", sales);
+        //public async Task MapSamsun()
+        //{
+        //    var sales = saleRepository.MapSamsunDb();
+        //    await Clients.All.SendAsync("ReceivedMapSamsun", sales);
 
-        }
+        //}
     }
 }
