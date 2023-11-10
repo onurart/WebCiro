@@ -7,9 +7,9 @@ setInterval(function () {
 $(function () {
 	connection.start().then(function () {
 
-
+		
 		InvokeSales();
-
+	
 	}).catch(function (err) {
 		return console.error(err.toString());
 	});
@@ -260,7 +260,7 @@ function BindSalesToGrid(sales) {
 ////	function processSale(index) {
 ////		if (index < sales.length) {
 ////			var sale = sales[index];
-
+	
 ////			$('#countantep').find("span").remove();
 
 ////			$('#countantep').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
@@ -290,7 +290,7 @@ function BindSalesToGrid(sales) {
 ////	function processSale(index) {
 ////		if (index < sales.length) {
 ////			var sale = sales[index];
-
+		
 ////			$('#countSamsun').find("span").remove();
 
 ////			$('#countSamsun').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning

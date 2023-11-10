@@ -30,7 +30,17 @@
     <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
     <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
     <script src="~/js/devextreme/exceljs.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        #countSale {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -40,47 +50,27 @@
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <div class="slider">
                     <a href="/Dashboard/Index">
-                        <p>Canlı Satiş</p>
+                    <p>Canlı Satiş</p>
                     </a>
                 </div>
-            </li>
-
-            <li class="twitter">
-                <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                <div class="slider">
-                    <a href="sdasdsa/asdsadsaaa">
-
-                        <p>Genel Rapor</p>
-                    </a>
-                </div>
-            </li>
-
-            <li class="instagram">
+            </li>  
+             <li class="instagram">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
-                <div class="slider">
+                 <div class="slider">
                     <a href="/Member/Logout">
-                        <p>Çıkıs Yap</p>
-                    </a>
-                </div>
-            </li>
-
-            @*  <li class="google">
-            <i class="fa fa-google" aria-hidden="true"></i>
-            <div class="slider">
-            <p>google</p>
-            </div>
-            </li>
-
-            <li class="whatsapp">
-            <i class="fa fa-whatsapp" aria-hidden="true"></i>
-            <div class="slider">
-            <p>whatsapp</p>
-            </div>
-            </li> *@
+                    <p>Çıkıs Yap</p>
+                     </a>
+                 </div>
+             </li>
         </ul>
     </div>
     @RenderBody()
-    <script>
+
+
+
+
+
+       <script>
 
         var svgTurkeyMap = document.getElementById("svg-turkey-map").getElementsByTagName("path");
         var cityName = document.getElementById("city-name");
@@ -135,16 +125,16 @@
                 let num1 = selectedDiv.innerText.replace(/[^\d.-]/g, '');
 
 
-
+    
                 let num1ToInt = parseInt(num1)
 
-
+             
 
                 let result = num1ToInt + randomNumber;
 
 
                 let formattedResult = formatter.format(result)
-
+              
 
 
                 let cntr = 0;
