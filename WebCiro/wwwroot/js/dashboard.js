@@ -67,7 +67,7 @@ function BindSalesToGrid(sales) {
 			let wrapInvokeModal = $('#wrapInkoveModal');
 
 			var tr = $('<tr/>');
-			tr.append(`<td id="upper-case">${sale.branch}</td>`);
+			tr.append(`<td id="upper-case">${sale.City}</td>`);
 			tr.append(`<td>${sale.amount} <span>&#8378;</span> </td>`);
 			tr.append(`<td>${sale.productName}</td>`);
 			tr.append(`<td>${sale.produtGruop}</td>`);
@@ -76,7 +76,7 @@ function BindSalesToGrid(sales) {
 			// Check if sale.branch matches any data-city-name in SVG paths
 			$('path[data-city-name]').each(function () {
 				var cityName = $(this).attr('data-city-name');
-				if (cityName === sale.branch) {
+				if (cityName === sale.City) {
 					var pathElement = $(this);
 
 					// Apply orange color to the current SVG path
@@ -104,7 +104,7 @@ function BindSalesToGrid(sales) {
 				return result
 			}
 			invokeModal.empty()
-			invokeModal.append(`<div id="product-city"> İl: ${firstLetterUpper(sale.branch)}</div>`)
+			invokeModal.append(`<div id="product-city"> İl: ${firstLetterUpper(sale.City)}</div>`)
 			invokeModal.append(` <div id="product-title"> Kategori: ${sale.produtGruop}</div>`)
 			invokeModal.append(`<div id="product-price"> Tutar: ${sale.amount} ₺</div>`)
 		}

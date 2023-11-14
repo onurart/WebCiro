@@ -6,7 +6,7 @@ namespace WebCiro.SalesTableDependencies
 {
     public class SalesTableDependencies : ISubscribeTableDependency
     {
-        SqlTableDependency<Sale> tableDependency;
+        SqlTableDependency<WI_DashboardTbl> tableDependency;
         DashboardHub dashboardHub;
         public SalesTableDependencies(DashboardHub dashboardHub)
         {
@@ -14,12 +14,12 @@ namespace WebCiro.SalesTableDependencies
         }
         public void SubscribeTableDependency(string connectionString)
         {
-            tableDependency = new SqlTableDependency<Sale>(connectionString);
+            tableDependency = new SqlTableDependency<WI_DashboardTbl>(connectionString);
             tableDependency.OnChanged += TableDependency_OnChanged;
             tableDependency.Start();
         }
 
-        private void TableDependency_OnChanged(object sender, TableDependency.SqlClient.Base.EventArgs.RecordChangedEventArgs<Sale> e)
+        private void TableDependency_OnChanged(object sender, TableDependency.SqlClient.Base.EventArgs.RecordChangedEventArgs<WI_DashboardTbl> e)
         {
             if (e.ChangeType != TableDependency.SqlClient.Base.Enums.ChangeType.None)
             {
