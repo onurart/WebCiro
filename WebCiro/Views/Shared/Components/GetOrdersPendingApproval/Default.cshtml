@@ -70,7 +70,7 @@
 </style>
 <div id="gridContainer">
     <div>
-        @(Html.DevExtreme().DataGrid<WI_DashboardTbl>()
+        @(Html.DevExtreme().DataGrid<WI_ReportApprove>()
             .DataSource(d => d.Mvc()
             .Controller("Dashboard")
             .LoadAction("GetOrdersPendingApprovalGrid")

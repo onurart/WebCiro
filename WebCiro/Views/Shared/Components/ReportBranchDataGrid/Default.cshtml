@@ -125,7 +125,7 @@
           .Columns(columns =>
           {
             columns.AddFor(m => m.INVOICE_MONTH).Caption("FATURA NUMARASI").CssClass("margin-right");
-            @* columns.AddFor(m => m.INVOICE_YEAR).Caption("FATURA NUMARASI").CssClass("margin-right"); *@
+              @* columns.AddFor(m => m.INVOICE_YEAR).Caption("FATURA NUMARASI").CssClass("margin-right"); *@
             columns.AddFor(m => m.INVOICE_NUMBER).Caption("FATURA NUMARASI").CssClass("margin-right");
             columns.AddFor(m => m.INVOICE_DATE).Caption("FATURA TARİHİ").CssClass("margin-right");
             columns.AddFor(m => m.CITY).Caption("İL").CssClass("text-left");
@@ -136,7 +136,7 @@
             columns.AddFor(m => m.PRODUCT_CODE).Caption("ÜRÜN KODU").CssClass("text-left");
             columns.AddFor(m => m.PRODUCT_NAME).Caption("ÜRÜN ADI").CssClass("text-left");
             columns.AddFor(m => m.PRODUCT_QUANTITY).Caption("ÜRÜN MİKTARI").CssClass("text-left");
-            @* columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left"); *@
+              @* columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left"); *@
             columns.AddFor(m => m.PRODUCT_SUPPLIER).Caption("ÜRÜN TEDARİKÇİSİ").CssClass("text-left");
         })
 
@@ -150,20 +150,20 @@
           .ShowBorders(true)
           )
               </text>);
-       @* items.Add()
-            .Title("Müşteri")
-            .Template(@<text>
-                @(Html.DevExtreme().DataGrid<MotorAsinBasketRobot.Entities.Concrete.Customer>()
-            .DataSource(d => d.Mvc().Controller("ClientCustomer").LoadAction("ClientCustomertList"))
-            .AllowColumnResizing(true)
-            .ColumnMinWidth(50)
-            .SearchPanel(s => s
-            .Visible(true)
-            .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
-            .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
-            .Paging(paging => paging.PageSize(10))
-            .Pager(pager =>
-            {
+       items.Add()
+.Title("BU HAFTA")
+.Template(@<text>
+    @(Html.DevExtreme().DataGrid<WI_State_Sales>()
+    .DataSource(d => d.Mvc().Controller("Dashboard").LoadAction("GetByReportBranchDataWeekGrid"))
+           .AllowColumnResizing(true)
+           .ColumnMinWidth(50)
+           .SearchPanel(s => s
+           .Visible(true)
+           .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+           .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+           .Paging(paging => paging.PageSize(10))
+           .Pager(pager =>
+           {
             pager.Visible(true);
             pager.DisplayMode(GridPagerDisplayMode.Full);
             pager.ShowPageSizeSelector(true);
@@ -171,24 +171,32 @@
             pager.ShowInfo(true);
             pager.ShowNavigationButtons(true);
         })
-            .Columns(columns =>
-            {
-            columns.AddFor(m => m.Id).Caption("No").Width(190);
-            columns.AddFor(m => m.CustomerReferance).Caption("Müşteri Referans").CssClass("text-center");
-            columns.AddFor(m => m.CustomerCode).Caption("Müşteri Kodu").CssClass("text-center");
-            columns.AddFor(m => m.IsActive).Caption("Müşteri Aktiv Mi?").DataType(GridColumnDataType.Boolean).Width(260);
+           .Columns(columns =>
+           {
+            columns.AddFor(m => m.INVOICE_NUMBER).Caption("FATURA NUMARASI").CssClass("margin-right");
+            columns.AddFor(m => m.INVOICE_DATE).Caption("FATURA TARİHİ").CssClass("margin-right");
+            columns.AddFor(m => m.CITY).Caption("İL").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_CODE).Caption("MÜŞTERİ KODU").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_NAME).Caption("MÜŞTERİ ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CATEGORY).Caption("ÜRÜN KATEGORİSİ").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_BRAND).Caption("ÜRÜN MARKASI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CODE).Caption("ÜRÜN KODU").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_NAME).Caption("ÜRÜN ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_QUANTITY).Caption("ÜRÜN MİKTARI").CssClass("text-left");
+            columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_SUPPLIER).Caption("ÜRÜN TEDARİKÇİSİ").CssClass("text-left");
         })
-            .ColumnAutoWidth(true)
-            .Selection(s => s.Mode(SelectionMode.Multiple))
-            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
-            .FilterRow(f => f.Visible(true))
-            .HeaderFilter(f => f.Visible(true))
-            .ShowBorders(true)
-            .Grouping(g => g.AutoExpandAll(false))
-            .ShowBorders(true)
-            )
-                </text>);
-       items.Add()
+           .ColumnAutoWidth(true)
+           .Selection(s => s.Mode(SelectionMode.Multiple))
+           .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+           .FilterRow(f => f.Visible(true))
+           .HeaderFilter(f => f.Visible(true))
+           .ShowBorders(true)
+           .Grouping(g => g.AutoExpandAll(false))
+           .ShowBorders(true)
+           )
+               </text>);
+       @* items.Add()
           .Title("Ürün Kampanyası")
           .Template(@<text>
               @(Html.DevExtreme().DataGrid<MotorAsinBasketRobot.Entities.Concrete.ProductsCampaigns>()
@@ -275,7 +283,7 @@
 )
 <div id="tabsContainer"></div>
 
-@* 
+@*
 
 <style>
     .dx-datagrid-headers {

@@ -51,7 +51,8 @@ namespace WebCiro.Hubs
             var sales = saleRepository.GetAtasehirDb();
             await Clients.All.SendAsync("ReceivedMapAtasehir", sales);
 
-        }   public async Task MapBasakSehir()
+        }  
+        public async Task MapBasakSehir()
         {
             var sales = saleRepository.GetBasakSehirDb();
             await Clients.All.SendAsync("ReceivedMapBasakSehir", sales);

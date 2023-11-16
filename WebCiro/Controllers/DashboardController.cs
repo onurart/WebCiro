@@ -2,6 +2,7 @@
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using WebCiro.Models;
 namespace WebCiro.Controllers
 {
@@ -121,47 +122,52 @@ namespace WebCiro.Controllers
 
             return DataSourceLoader.Load(data, loadOptions);
         }
-        //public async Task<object> GetByReportBranchDataWeekGrid(DataSourceLoadOptions loadOptions)
-        //{
-        //    var branch = TempData["branch"] as string ?? "DefaultBranch";
-        //    TempData.Keep("branch"); // TempData'deki "branch" verisini bir sonraki isteğe kadar koru
 
-        //    if (string.IsNullOrEmpty(branch))
-        //    {
-        //        return BadRequest("Branch parameter is missing.");
-        //    }
 
-        //    var currentDate = DateTime.Now;
-        //    var startOfWeek = currentDate.AddDays(-1 * (int)currentDate.DayOfWeek);
-        //    var endOfWeek = startOfWeek.AddDays(6);
+        public async Task<object> GetByReportBranchDataWeekGrid(DataSourceLoadOptions loadOptions)
+        {
+            var branch = TempData["branch"] as string ?? "DefaultBranch";
+            TempData.Keep("branch"); // TempData'deki "branch" verisini bir sonraki isteğe kadar koru
 
-        //    var data = await _db.WI_State_Sales
-        //         .Where(item => item.INVOICE_WEEK >= startOfWeek && item.INVOICE_DATE <= endOfWeek && item.CITY == branch)
-        //         .Select(item => new WI_State_Sales
-        //         {
-        //            Id = item.Id,
-        //            INVOICE_NUMBER = item.INVOICE_NUMBER,
-        //            INVOICE_DATE = item.INVOICE_DATE,
-        //            // INVOICE_YEAR = item.INVOICE_YEAR,
-        //            INVOICE_MONTH = item.INVOICE_MONTH,
-        //            INVOICE_WEEK = item.INVOICE_WEEK,
-        //            CITY = item.CITY,
-        //            CUSTOMER_CODE = item.CUSTOMER_CODE,
-        //            CUSTOMER_NAME = item.CUSTOMER_NAME.Length > 20 ? item.CUSTOMER_NAME.Substring(0, 20) : item.CUSTOMER_NAME,
-        //            PRODUCT_CATEGORY = item.PRODUCT_CATEGORY,
-        //            PRODUCT_BRAND = item.PRODUCT_BRAND,
-        //            PRODUCT_CODE = item.PRODUCT_CODE,
-        //            PRODUCT_NAME = item.PRODUCT_NAME.Length > 20 ? item.PRODUCT_NAME.Substring(0, 20) : item.PRODUCT_NAME,
-        //            PRODUCT_QUANTITY = item.PRODUCT_QUANTITY,
-        //            // NET_AMOUNT = (double)item.NET_AMOUNT,
-        //            PRODUCT_SUPPLIER = item.PRODUCT_SUPPLIER.Length > 20 ? item.PRODUCT_SUPPLIER.Substring(0, 20) : item.PRODUCT_SUPPLIER,
-        //        })
-        //        .ToListAsync();
+            if (string.IsNullOrEmpty(branch))
+            {
+                return BadRequest("Branch parameter is missing.");
+            }
 
-        //    return DataSourceLoader.Load(data, loadOptions);
-        //}
-        
-        
+
+
+            int currentWeekNumber = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
+                DateTime.Now,
+                CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Monday);
+
+            var data = await _db.WI_State_Sales
+                .Where(item => item.CITY == branch && item.INVOICE_WEEK == currentWeekNumber)
+                .Select(item => new WI_State_Sales
+                {
+                    Id = item.Id,
+                    INVOICE_NUMBER = item.INVOICE_NUMBER,
+                    INVOICE_DATE = item.INVOICE_DATE,
+                    // INVOICE_YEAR = item.INVOICE_YEAR,
+                    INVOICE_MONTH = item.INVOICE_MONTH,
+                    INVOICE_WEEK = item.INVOICE_WEEK,
+                    CITY = item.CITY,
+                    CUSTOMER_CODE = item.CUSTOMER_CODE,
+                    CUSTOMER_NAME = item.CUSTOMER_NAME.Length > 20 ? item.CUSTOMER_NAME.Substring(0, 20) : item.CUSTOMER_NAME,
+                    PRODUCT_CATEGORY = item.PRODUCT_CATEGORY,
+                    PRODUCT_BRAND = item.PRODUCT_BRAND,
+                    PRODUCT_CODE = item.PRODUCT_CODE,
+                    PRODUCT_NAME = item.PRODUCT_NAME.Length > 20 ? item.PRODUCT_NAME.Substring(0, 20) : item.PRODUCT_NAME,
+                    PRODUCT_QUANTITY = item.PRODUCT_QUANTITY,
+                    // NET_AMOUNT = (double)item.NET_AMOUNT,
+                    PRODUCT_SUPPLIER = item.PRODUCT_SUPPLIER.Length > 20 ? item.PRODUCT_SUPPLIER.Substring(0, 20) : item.PRODUCT_SUPPLIER,
+                })
+                .ToListAsync();
+
+            return DataSourceLoader.Load(data, loadOptions);
+        }
+
+
 
 
 
@@ -184,23 +190,26 @@ namespace WebCiro.Controllers
         [HttpGet]
         public async Task<object> GetOrdersPendingApprovalGrid(DataSourceLoadOptions loadOptions)
         {
-            var data = await _db.WI_DashboardTbl
+            var data = await _db.WI_ReportApprove
                 .Where(item => item.Status == "Onay Bekliyor")
-                .Select(item => new WI_DashboardTbl
+                .Select(item => new WI_ReportApprove
                 {
                     Id = item.Id,
-                    City = item.City,
-                    Category = Convert.ToString(item.Category),
-                    CustomerCode = item.CustomerCode,
+                    SalesmanName = item.SalesmanName,
                     CustomerName = item.CustomerName.Substring(0, 25),
+                    CustomerCode = item.CustomerCode,
                     OrderDate = item.OrderDate,
                     OrderNumber = item.OrderNumber,
+                    City = item.City,
                     ProductName = item.ProductName.Substring(0, 25),
-                    Status = item.Status,
-                    PartBrand = Convert.ToString(item.PartBrand),
                     TotalTl = item.TotalTl,
+                    VehicleType = Convert.ToString(item.VehicleType),
                     VehicleBrand = item.VehicleBrand,
-                    VehicleType = Convert.ToString(item.VehicleType)
+                    PartBrand = Convert.ToString(item.PartBrand),
+                    Category = Convert.ToString(item.Category),
+                    Status = item.Status,
+
+
                 })
                 .ToListAsync();
 
@@ -208,23 +217,24 @@ namespace WebCiro.Controllers
         }
         public async Task<object> ThoseWaitingforShipmentlGrid(DataSourceLoadOptions loadOptions)
         {
-            var data = await _db.WI_DashboardTbl
+            var data = await _db.WI_ReportApprove
                 .Where(item => item.Status == "Sevk Bekliyor")
-                .Select(item => new WI_DashboardTbl
+                .Select(item => new WI_ReportApprove
                 {
                     Id = item.Id,
-                    City = item.City,
-                    Category = Convert.ToString(item.Category),
-                    CustomerCode = item.CustomerCode,
+                    SalesmanName = item.SalesmanName,
                     CustomerName = item.CustomerName.Substring(0, 25),
+                    CustomerCode = item.CustomerCode,
                     OrderDate = item.OrderDate,
                     OrderNumber = item.OrderNumber,
+                    City = item.City,
                     ProductName = item.ProductName.Substring(0, 25),
-                    Status = item.Status,
-                    PartBrand = Convert.ToString(item.PartBrand),
                     TotalTl = item.TotalTl,
+                    VehicleType = Convert.ToString(item.VehicleType),
                     VehicleBrand = item.VehicleBrand,
-                    VehicleType = Convert.ToString(item.VehicleType)
+                    PartBrand = Convert.ToString(item.PartBrand),
+                    Category = Convert.ToString(item.Category),
+                    Status = item.Status,
                 })
                 .ToListAsync();
 
