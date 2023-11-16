@@ -7,9 +7,10 @@ setInterval(function () {
 $(function () {
 	connection.start().then(function () {
 
-		
+
 		InvokeSales();
-	
+		//InvokeAntep();
+
 	}).catch(function (err) {
 		return console.error(err.toString());
 	});
@@ -28,7 +29,9 @@ connection.on("ReceivedSales", function (sales) {
 });
 
 function BindSalesToGrid(sales) {
+	console.log(sales)
 	function processSale(index) {
+		let rn = 0;
 		if (index < sales.length) {
 			var sale = sales[index];
 
@@ -41,9 +44,9 @@ function BindSalesToGrid(sales) {
 			const counter = document.getElementById('countSale');
 
 			const animate = () => {
-				console.log(counter)
+
 				let num1 = Number(counter.innerText.replace(/[^\d.-]/g, ''))
-				let num2 = sale.amount;
+				let num2 = sale.totalTl;
 				let sum = num1 + num2;
 
 				let cntr = 0;
@@ -67,16 +70,16 @@ function BindSalesToGrid(sales) {
 			let wrapInvokeModal = $('#wrapInkoveModal');
 
 			var tr = $('<tr/>');
-			tr.append(`<td id="upper-case">${sale.City}</td>`);
-			tr.append(`<td>${sale.amount} <span>&#8378;</span> </td>`);
+			tr.append(`<td id="upper-case">${sale.city}</td>`);
+			tr.append(`<td>${sale.totalTl} <span>&#8378;</span> </td>`);
 			tr.append(`<td>${sale.productName}</td>`);
-			tr.append(`<td>${sale.produtGruop}</td>`);
+			tr.append(`<td>${sale.vehicleBrand}</td>`);
 			$('#tblSale tbody').prepend(tr); // Use prepend to add the new row at the beginning
 
 			// Check if sale.branch matches any data-city-name in SVG paths
 			$('path[data-city-name]').each(function () {
 				var cityName = $(this).attr('data-city-name');
-				if (cityName === sale.City) {
+				if (cityName === sale.city || sale.Rn === rn + 1) {
 					var pathElement = $(this);
 
 					// Apply orange color to the current SVG path
@@ -92,7 +95,7 @@ function BindSalesToGrid(sales) {
 						wrapInvokeModal.removeClass('blink');
 
 						// Process the next sale after 10 seconds
-
+						rn++;
 						processSale(index + 1);
 					}, 7500); // 10 seconds
 
@@ -104,16 +107,15 @@ function BindSalesToGrid(sales) {
 				return result
 			}
 			invokeModal.empty()
-			invokeModal.append(`<div id="product-city"> İl: ${firstLetterUpper(sale.City)}</div>`)
-			invokeModal.append(` <div id="product-title"> Kategori: ${sale.produtGruop}</div>`)
-			invokeModal.append(`<div id="product-price"> Tutar: ${sale.amount} ₺</div>`)
+			invokeModal.append(`<div id="product-city"> İl: ${firstLetterUpper(sale.city)}</div>`)
+			invokeModal.append(` <div id="product-title"> Kategori: ${sale.vehicleBrand}</div>`)
+			invokeModal.append(`<div id="product-price"> Tutar: ${sale.totalTl} ₺</div>`)
 		}
 	}
 
 	// Start processing the first sale
 	processSale(0);
 }
-
 
 
 
@@ -260,7 +262,7 @@ function BindSalesToGrid(sales) {
 ////	function processSale(index) {
 ////		if (index < sales.length) {
 ////			var sale = sales[index];
-	
+
 ////			$('#countantep').find("span").remove();
 
 ////			$('#countantep').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning
@@ -290,7 +292,7 @@ function BindSalesToGrid(sales) {
 ////	function processSale(index) {
 ////		if (index < sales.length) {
 ////			var sale = sales[index];
-		
+
 ////			$('#countSamsun').find("span").remove();
 
 ////			$('#countSamsun').append(`<span id="countSale">${sale.branch} <span>&#8378;</span> </span>`); // Use prepend to add the new row at the beginning

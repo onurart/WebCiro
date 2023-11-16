@@ -15,8 +15,8 @@
         .PaletteExtensionMode(VizPaletteExtensionMode.Blend)
     .Series(s => s
         .Add()
-        .ArgumentField("StockCategories")
-        .ValueField("TotalAmount")
+        .ArgumentField("Category")
+        .ValueField("TotalTl")
         .Label(l => l
             .Visible(true)
             .Connector(c => c
@@ -51,6 +51,7 @@
     });
 
     var chartData = [];
+    console.log(chartData)
 
     function updatePieChart() {
         $.get('/Dashboard/GetByReportBranchPie', function (data) {

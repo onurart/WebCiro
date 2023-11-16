@@ -1,4 +1,283 @@
-﻿<style>
+﻿@using DevExtreme.AspNet.Mvc.Builders;
+<style type="text/css">
+    .uppercase .dx-texteditor-input {
+        text-transform: uppercase;
+    }
+
+    .hover-tabs-img-close {
+        top: 222px;
+        margin: 0px;
+        position: absolute;
+        font-weight: 600;
+        z-index: 999;
+        left: 19.6%;
+    }
+
+    @@media screen and (min-width:1140px) {
+        img.hover-tabs-img {
+            left: 7.2%;
+            top: 3.5%;
+        }
+    }
+
+    .card {
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+    }
+</style>
+
+<script>
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            var secilenID = document.getElementById("sonuc");
+            secilenID.style.display = "none";
+        }, 4000);
+    });
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            var secilenID = document.getElementById("sonuc2");
+            secilenID.style.display = "none";
+        }, 4000);
+    });
+</script>
+<div>
+    <div><p class="hover-tabs-img-close" id="sonuc">Filterle</p></div>
+    <img src="~/WebDesign/img/hover-on-tabs.svg" id="sonuc2" class="hover-tabs-img" alt="Filterle" />
+</div>
+@(Html.DevExtreme().TabPanel()
+   .Items(items =>
+   {
+
+       items.Add()
+          .Title("BU YIL")
+          .Template(@<text>
+              @(
+          Html.DevExtreme().DataGrid<WI_State_Sales>()
+          .DataSource(d => d.Mvc().Controller("Dashboard").LoadAction("GetByReportBranchDataGrid"))
+          .AllowColumnResizing(true)
+          .ColumnMinWidth(50)
+          .SearchPanel(s => s
+          .Visible(true)
+          .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+          .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+          .Paging(paging => paging.PageSize(10))
+          .Pager(pager =>
+          {
+            pager.Visible(true);
+            pager.DisplayMode(GridPagerDisplayMode.Full);
+            pager.ShowPageSizeSelector(true);
+            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 1000, 'all']"));
+            pager.ShowInfo(true);
+            pager.ShowNavigationButtons(true);
+        })
+          .Columns(columns =>
+          {
+            columns.AddFor(m => m.INVOICE_NUMBER).Caption("FATURA NUMARASI").CssClass("margin-right");
+            columns.AddFor(m => m.INVOICE_DATE).Caption("FATURA TARİHİ").CssClass("margin-right");
+            columns.AddFor(m => m.CITY).Caption("İL").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_CODE).Caption("MÜŞTERİ KODU").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_NAME).Caption("MÜŞTERİ ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CATEGORY).Caption("ÜRÜN KATEGORİSİ").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_BRAND).Caption("ÜRÜN MARKASI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CODE).Caption("ÜRÜN KODU").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_NAME).Caption("ÜRÜN ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_QUANTITY).Caption("ÜRÜN MİKTARI").CssClass("text-left");
+            columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_SUPPLIER).Caption("ÜRÜN TEDARİKÇİSİ").CssClass("text-left");
+        })
+
+          .ColumnAutoWidth(true)
+          .Selection(s => s.Mode(SelectionMode.Multiple))
+          .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+          .FilterRow(f => f.Visible(true))
+          .HeaderFilter(f => f.Visible(true))
+          .ShowBorders(true)
+          .Grouping(g => g.AutoExpandAll(false))
+          .ShowBorders(true)
+          )
+              </text>);
+
+       items.Add()
+          .Title("BU AY")
+          .Template(@<text>
+              @(
+          Html.DevExtreme().DataGrid<WI_State_Sales>()
+          .DataSource(d => d.Mvc().Controller("Dashboard").LoadAction("GetByReportBranchDataMonthGrid"))
+          .AllowColumnResizing(true)
+          .ColumnMinWidth(50)
+          .SearchPanel(s => s
+          .Visible(true)
+          .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+          .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+          .Paging(paging => paging.PageSize(10))
+          .Pager(pager =>
+          {
+            pager.Visible(true);
+            pager.DisplayMode(GridPagerDisplayMode.Full);
+            pager.ShowPageSizeSelector(true);
+            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 1000, 'all']"));
+            pager.ShowInfo(true);
+            pager.ShowNavigationButtons(true);
+        })
+          .Columns(columns =>
+          {
+            columns.AddFor(m => m.INVOICE_MONTH).Caption("FATURA NUMARASI").CssClass("margin-right");
+            @* columns.AddFor(m => m.INVOICE_YEAR).Caption("FATURA NUMARASI").CssClass("margin-right"); *@
+            columns.AddFor(m => m.INVOICE_NUMBER).Caption("FATURA NUMARASI").CssClass("margin-right");
+            columns.AddFor(m => m.INVOICE_DATE).Caption("FATURA TARİHİ").CssClass("margin-right");
+            columns.AddFor(m => m.CITY).Caption("İL").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_CODE).Caption("MÜŞTERİ KODU").CssClass("text-left");
+            columns.AddFor(m => m.CUSTOMER_NAME).Caption("MÜŞTERİ ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CATEGORY).Caption("ÜRÜN KATEGORİSİ").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_BRAND).Caption("ÜRÜN MARKASI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_CODE).Caption("ÜRÜN KODU").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_NAME).Caption("ÜRÜN ADI").CssClass("text-left");
+            columns.AddFor(m => m.PRODUCT_QUANTITY).Caption("ÜRÜN MİKTARI").CssClass("text-left");
+            @* columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left"); *@
+            columns.AddFor(m => m.PRODUCT_SUPPLIER).Caption("ÜRÜN TEDARİKÇİSİ").CssClass("text-left");
+        })
+
+          .ColumnAutoWidth(true)
+          .Selection(s => s.Mode(SelectionMode.Multiple))
+          .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+          .FilterRow(f => f.Visible(true))
+          .HeaderFilter(f => f.Visible(true))
+          .ShowBorders(true)
+          .Grouping(g => g.AutoExpandAll(false))
+          .ShowBorders(true)
+          )
+              </text>);
+       @* items.Add()
+            .Title("Müşteri")
+            .Template(@<text>
+                @(Html.DevExtreme().DataGrid<MotorAsinBasketRobot.Entities.Concrete.Customer>()
+            .DataSource(d => d.Mvc().Controller("ClientCustomer").LoadAction("ClientCustomertList"))
+            .AllowColumnResizing(true)
+            .ColumnMinWidth(50)
+            .SearchPanel(s => s
+            .Visible(true)
+            .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+            .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+            .Paging(paging => paging.PageSize(10))
+            .Pager(pager =>
+            {
+            pager.Visible(true);
+            pager.DisplayMode(GridPagerDisplayMode.Full);
+            pager.ShowPageSizeSelector(true);
+            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 1000, 'all']"));
+            pager.ShowInfo(true);
+            pager.ShowNavigationButtons(true);
+        })
+            .Columns(columns =>
+            {
+            columns.AddFor(m => m.Id).Caption("No").Width(190);
+            columns.AddFor(m => m.CustomerReferance).Caption("Müşteri Referans").CssClass("text-center");
+            columns.AddFor(m => m.CustomerCode).Caption("Müşteri Kodu").CssClass("text-center");
+            columns.AddFor(m => m.IsActive).Caption("Müşteri Aktiv Mi?").DataType(GridColumnDataType.Boolean).Width(260);
+        })
+            .ColumnAutoWidth(true)
+            .Selection(s => s.Mode(SelectionMode.Multiple))
+            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+            .ShowBorders(true)
+            .Grouping(g => g.AutoExpandAll(false))
+            .ShowBorders(true)
+            )
+                </text>);
+       items.Add()
+          .Title("Ürün Kampanyası")
+          .Template(@<text>
+              @(Html.DevExtreme().DataGrid<MotorAsinBasketRobot.Entities.Concrete.ProductsCampaigns>()
+          .DataSource(d => d.Mvc().Controller("ClientProductCampaing").LoadAction("ClientProductCampaingList"))
+          .AllowColumnResizing(true)
+          .ColumnMinWidth(50)
+          .SearchPanel(s => s
+          .Visible(true)
+          .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+          .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+          .Paging(paging => paging.PageSize(10))
+          .Pager(pager =>
+          {
+            pager.Visible(true);
+            pager.DisplayMode(GridPagerDisplayMode.Full);
+            pager.ShowPageSizeSelector(true);
+            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 1000, 'all']"));
+            pager.ShowInfo(true);
+            pager.ShowNavigationButtons(true);
+        })
+          .Columns(columns =>
+          {
+            columns.AddFor(m => m.Id).Caption("No").Width(190);
+            columns.AddFor(m => m.ProductReferance).Caption("Kampanya Ürün No").CssClass("text-center").Width(190);
+            columns.AddFor(m => m.ProductCode).Caption("Kampanya Ürün Kodu").CssClass("text-center");
+            columns.AddFor(m => m.ProductGroup).Caption("Kampanya Ürün Grup").CssClass("text-center");
+            columns.AddFor(m => m.MinOrder).Caption("Kampanya Minimum Sipariş").CssClass("text-center");
+            columns.AddFor(m => m.IsActive).Caption("Kampanya Aktiv Mi?").CssClass("text-center");
+        })
+          .ColumnAutoWidth(true)
+          .Selection(s => s.Mode(SelectionMode.Multiple))
+          .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+          .FilterRow(f => f.Visible(true))
+          .HeaderFilter(f => f.Visible(true))
+          .ShowBorders(true)
+          .Grouping(g => g.AutoExpandAll(false))
+          .ShowBorders(true)
+          )
+              </text>);
+       items.Add()
+   .Title("Ürünler")
+   .Template(@<text>
+       @(
+    Html.DevExtreme().DataGrid<MotorAsinBasketRobot.Entities.Concrete.Product>()
+    .DataSource(d => d.Mvc().Controller("ClientProduct").LoadAction("GetClientProductList"))
+    .AllowColumnResizing(true)
+    .ColumnMinWidth(50)
+    .SearchPanel(s => s
+    .Visible(true)
+    .HighlightCaseSensitive(true).Width(300)).ElementAttr("class", "uppercase")
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
+    .Paging(paging => paging.PageSize(10))
+    .Pager(pager =>
+    {
+            pager.Visible(true);
+            pager.DisplayMode(GridPagerDisplayMode.Full);
+            pager.ShowPageSizeSelector(true);
+            pager.AllowedPageSizes(new JS("[5, 10,30,70,120,180, 1000, 'all']"));
+            pager.ShowInfo(true);
+            pager.ShowNavigationButtons(true);
+        })
+    .Columns(columns =>
+    {
+            columns.AddFor(m => m.Id).Caption("No").Width(190);
+            columns.AddFor(m => m.ProductReferance).Caption("Ürün No").CssClass("text-center").Width(190);
+            columns.AddFor(m => m.ProductCode).Caption("Ürün Kodu").CssClass("text-center");
+            columns.AddFor(m => m.ProductGroup1).Caption("Minimum Sipariş").CssClass("text-center");
+            columns.AddFor(m => m.ProductGroup2).Caption("Ürün Grubu").CssClass("text-center");
+            columns.AddFor(m => m.ProductGroup3).Caption("Ürün Grubu").CssClass("text-center");
+            columns.AddFor(m => m.ProductGroup4).Caption("Ürün Grubu").CssClass("text-center");
+            columns.AddFor(m => m.IsActive).Caption("Ürün Aktif Mi?").DataType(GridColumnDataType.Boolean).Width(250);
+        })
+    .ColumnAutoWidth(true)
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .ShowBorders(true)
+    .Grouping(g => g.AutoExpandAll(false))
+    .ShowBorders(true)
+    )
+       </text>); *@
+   })
+)
+<div id="tabsContainer"></div>
+
+@* 
+
+<style>
     .dx-datagrid-headers {
         background-color: #333 !important;
         color: white;
@@ -70,12 +349,12 @@
 </style>
 <div id="gridContainer">
     <div>
-        @(Html.DevExtreme().DataGrid<NET_001_CIRO>()
+        @(Html.DevExtreme().DataGrid<WI_State_Sales>()
             .DataSource(d => d.Mvc()
             .Controller("Dashboard")
             .LoadAction("GetByReportBranchDataGrid")
             .Key("Id"))
-            .ID("ReportBranch")
+            .ID("Id")
             .ColumnMinWidth(100)
             .ColumnAutoWidth(true)
             .ShowColumnLines(false)
@@ -105,15 +384,18 @@
             .Sorting(sorting => sorting.Mode(GridSortingMode.Multiple))
             .Columns(columns =>
             {
-                columns.AddFor(m => m.City).Caption("İL").CssClass("margin-right");
-                columns.AddFor(m => m.StockCategories).Caption("KATEGORİ").CssClass("text-left");
-                columns.AddFor(m => m.AccountCode).Caption("MÜŞTERİ KODU").CssClass("text-left");
-                columns.AddFor(m => m.Customer).Caption("MÜŞTERİ").CssClass("text-left");
-                columns.AddFor(m => m.AUXCODE2).Caption("ARAÇ MARKA").CssClass("text-left");
-                columns.AddFor(m => m.StokName).Caption("ÜRÜN ADI").CssClass("text-left");
-                columns.AddFor(m => m.SpeCode).Caption("TEDARİKÇİ").CssClass("text-left");
-                // columns.AddFor(m => m.Amount).Caption("FİYAT").CssClass("text-left");
-                columns.AddFor(m => m.TlNet).Caption("TL FİYAT").CssClass("text-left");
+                columns.AddFor(m => m.INVOICE_NUMBER).Caption("FATURA NUMARASI").CssClass("margin-right");
+                columns.AddFor(m => m.INVOICE_DATE).Caption("FATURA TARİHİ").CssClass("margin-right");
+                columns.AddFor(m => m.CITY).Caption("İL").CssClass("text-left");
+                columns.AddFor(m => m.CUSTOMER_CODE).Caption("MÜŞTERİ KODU").CssClass("text-left");
+                columns.AddFor(m => m.CUSTOMER_NAME).Caption("MÜŞTERİ ADI").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_CATEGORY).Caption("ÜRÜN KATEGORİSİ").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_BRAND).Caption("ÜRÜN MARKASI").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_CODE).Caption("ÜRÜN KODU").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_NAME).Caption("ÜRÜN ADI").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_QUANTITY).Caption("ÜRÜN MİKTARI").CssClass("text-left");
+                columns.AddFor(m => m.NET_AMOUNT).Caption("NET TUTAR").CssClass("text-left");
+                columns.AddFor(m => m.PRODUCT_SUPPLIER).Caption("ÜRÜN TEDARİKÇİSİ").CssClass("text-left");
 
             })
 
@@ -130,7 +412,7 @@
 
 
     </div>
-</div>
+</div> *@
 
 <script src="~/js/filesaver.min.js"></script>
 
@@ -142,7 +424,7 @@
     //     // Your existing printPage logic here
     // }
 
- 
+
     function exporting(e) {
         var workbook = new ExcelJS.Workbook();
         var worksheet = workbook.addWorksheet('offer');

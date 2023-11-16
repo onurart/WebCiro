@@ -18,6 +18,45 @@ namespace WebCiro.Hubs
             await Clients.All.SendAsync("ReceivedSales", sales);
 
         }
+        public async Task MapGaziantep()
+        {
+            var sales = saleRepository.MapGazianteptDb();
+            await Clients.All.SendAsync("ReceivedMapGaziantep", sales);
+
+        }
+        
+        public async Task MapSamsun()
+        {
+            var sales = saleRepository.MapSamsunDb();
+            await Clients.All.SendAsync("ReceivedMapSamsun", sales);
+
+        }
+        
+        public async Task MapIzmir()
+        {
+            var sales = saleRepository.GetIzmirFromDb();
+            await Clients.All.SendAsync("ReceivedMapIzmir", sales);
+
+        }
+        
+        public async Task MapAnkara()
+        {
+            var sales = saleRepository.GetAnkaraDb();
+            await Clients.All.SendAsync("ReceivedMapAnkara", sales);
+
+        }
+        
+        public async Task MapAtasehir()
+        {
+            var sales = saleRepository.GetAtasehirDb();
+            await Clients.All.SendAsync("ReceivedMapAtasehir", sales);
+
+        }   public async Task MapBasakSehir()
+        {
+            var sales = saleRepository.GetBasakSehirDb();
+            await Clients.All.SendAsync("ReceivedMapBasakSehir", sales);
+
+        }
         
         //public async Task MapCustomer()
         //{

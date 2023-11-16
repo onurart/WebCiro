@@ -3,7 +3,6 @@ using WebCiro.Extenisons;
 using WebCiro.Hubs;
 using WebCiro.MiddlewareExtensions;
 using WebCiro.Models;
-using WebCiro.Models.Authentication;
 using WebCiro.SalesTableDependencies;
 
 var builder = WebApplication.CreateBuilder(args);
