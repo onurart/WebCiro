@@ -24,12 +24,12 @@ namespace WebCiro.SalesTableDependencies
             if (e.ChangeType != TableDependency.SqlClient.Base.Enums.ChangeType.None)
             {
                 dashboardHub.SendSales();
-                dashboardHub.MapGaziantep();
-                dashboardHub.MapSamsun();
-                dashboardHub.MapIzmir();
-                dashboardHub.MapAnkara();
-                dashboardHub.MapAtasehir();
-                dashboardHub.MapBasakSehir();
+                //dashboardHub.MapGaziantep();
+                //dashboardHub.MapSamsun();
+                //dashboardHub.MapIzmir();
+                //dashboardHub.MapAnkara();
+                //dashboardHub.MapAtasehir();
+                //dashboardHub.MapBasakSehir();
             }
         }
     }

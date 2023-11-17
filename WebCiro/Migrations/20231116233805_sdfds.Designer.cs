@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebCiro.Models;
 
@@ -11,9 +12,11 @@ using WebCiro.Models;
 namespace WebCiro.Migrations
 {
     [DbContext(typeof(WebCiroDbContext))]
-    partial class WebCiroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231116233805_sdfds")]
+    partial class sdfds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

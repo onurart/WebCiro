@@ -17,27 +17,25 @@ namespace WebCiro.Controllers
         {
             return View();
         }
-        //[HttpGet]
-        //public async Task<IActionResult> GetByReportBranchPie()
-        //{
-        //    var branch = TempData["branch"] as string ?? "DefaultBranch";
+        [HttpGet]
+        public async Task<IActionResult> GetByReportBranchPie()
+        {
+            var branch = TempData["branch"] as string ?? "DefaultBranch";
 
-        //    // Entity Framework kullanarak veritabanından veri çekme
-        //    var data = await _db.WI_DashboardTbl
-        //        .Where(c => c.City == branch)
-        //        .GroupBy(c => c.Category)
-        //        .Select(group => new
-        //        {
-        //            Category = group.Key,
-        //            TotalTl = group.Sum(c => c.TotalTl),  // Update property name to TotalAmount
-        //            ProductName = group.Select(x => x.ProductName)
-        //        })
-        //        .OrderByDescending(result => result.ProductName).Take(12)  // Update property name to TotalAmount
-        //        .ToListAsync();
+            var data = await _db.WI_Ste_Prd_Ctr_Day
+                .Where(c => c.CITY == branch)
+                .GroupBy(c => c.PRODUCT_CATEGORY)
+                .Select(group => new
+                {
+                    ProductCategory = group.Key,
+                    TotalAmount = group.Sum(c => c.INVOICE_COUNT),  
+                    SpeCode = group.Select(x => x.PRODUCT_CATEGORY)
+                })
+                .OrderByDescending(result => result.TotalAmount).Take(12) 
+                .ToListAsync();
 
-        //    // Verileri JSON formatına dönüştürerek döndürme
-        //    return Json(data);
-        //}
+            return Json(data);
+        }
 
         public IActionResult GetByReportBranch(string branch)
         {
@@ -53,7 +51,7 @@ namespace WebCiro.Controllers
         public async Task<object> GetByReportBranchDataGrid(DataSourceLoadOptions loadOptions)
         {
             var branch = TempData["branch"] as string ?? "DefaultBranch";
-            TempData.Keep("branch"); // TempData'deki "branch" verisini bir sonraki isteğe kadar koru
+            TempData.Keep("branch");
 
             if (string.IsNullOrEmpty(branch))
             {
